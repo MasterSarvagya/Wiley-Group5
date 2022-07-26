@@ -7,7 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Employee {
 
-	private int empID, empPhoneNumber;
-	private String empName;
+	private Integer empID, empPhoneNumber,bookLimit;
+	private Boolean isAdmin;
+	private String empName,password;
 
 }
