@@ -24,12 +24,12 @@ values
 (908,'On Becoming a Leader','Management','Warren Bennis','1100','1100'),
 (909,'Turn the Ship Around!','Management','David Marquet','1250','1250');
 
-create table if not exists Employee(
+create table if not exists Employees(
 Employee_ID int primary key,
 Employee_NAME varchar(40) ,
 Phone_Number long,
 isAdmin boolean,
-Pasword varchar(40),
+Password varchar(40),
 Book_Limit int
 
 );

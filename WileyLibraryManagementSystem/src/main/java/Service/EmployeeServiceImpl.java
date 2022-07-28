@@ -3,31 +3,34 @@ package Service;
 import java.util.List;
 
 import Bean.Employee;
+import Persistance.EmployeeDao;
+import Persistance.EmployeeDaoImpl;
 
 public class EmployeeServiceImpl implements EmployeeService {
+	private EmployeeDao employeeDao = new EmployeeDaoImpl();
 
 	@Override
 	public Boolean addEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		if(employeeDao.addEmployee(employee) > 0)
+			return true;
+		return false;
 	}
 
 	@Override
 	public Boolean removeEmployee(Integer empID) {
-		// TODO Auto-generated method stub
-		return null;
+		if(employeeDao.removeEmployee(empID)>0)
+			return true;
+		return false;
 	}
 
 	@Override
 	public Employee searchEmployee(Integer empID) {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.searchEmployee(empID);
 	}
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+		return employeeDao.getAllEmployees();
 	}
 
 	@Override

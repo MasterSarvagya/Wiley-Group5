@@ -6,9 +6,9 @@ import Bean.Employee;
 
 public interface EmployeeDao {
 
-	Boolean addEmployee(Employee employee);
+	Integer addEmployee(Employee employee);
 
-	Boolean removeEmployee(int empID);
+	Integer removeEmployee(int empID);
 
 	Employee searchEmployee(int empID);
 
