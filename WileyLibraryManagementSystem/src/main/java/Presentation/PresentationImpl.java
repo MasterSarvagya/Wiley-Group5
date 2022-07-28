@@ -4,6 +4,7 @@ public class PresentationImpl implements Presentation {
 
 	@Override
 	public void showMenu() {
+		System.out.println("======================================================");
 		System.out.println(" 0.   Exit");
 		System.out.println(" 1.   Add An Employee");
 		System.out.println(" 2.   Delete An Employee");
@@ -15,145 +16,92 @@ public class PresentationImpl implements Presentation {
 		System.out.println(" 8.   Get All Book");
 		System.out.println(" 9.   Issue A Book");
 		System.out.println(" 10.  Return A Book");
-		
-
+		System.out.println("======================================================");
 	}
 
 	@Override
-	public void performMenu(int choice) {
-	
+	public Boolean performMenu(int choice) {
+
 		switch (choice) {
 		case 1:
-			
-		 addEmployee();
-				
-			
+			addEmployee();
 			break;
-			
-		
 		case 2:
-			
 			delEmployee();
-			
 			break;
-			
-			
-		
 		case 3:
-			
 			searchEmployee();
 			break;
-			
-			
 		case 4:
-			
 			getAllemployee();
 			break;
-			
-			
-			
 		case 5:
-			
 			addBook();
 			break;
-			
-			
 		case 6:
-			
 			delBook();
 			break;
-			
-			
 		case 7:
-			
 			searchBook();
 			break;
-			
-			
 		case 8:
-			
 			getAllBook();
 			break;
-			
-			
 		case 9:
-			
 			issueBook();
 			break;
-			
-			
 		case 10:
-			
 			returnBook();
 			break;
-			
-			
-			
 		case 0:
-			
-			System.out.println("Exit from the system");
-			break;	
-			
-			
-			
-		default :
-			
-			System.out.println("Error Occurred");
+			System.out.print("Thanks For Using The System");
+			return false;
+		default:
+			System.out.println("Wrong Choice");
 			break;
 		}
 
+		return true;
+
 	}
 
-
 	private void returnBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void issueBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void getAllBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void searchBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void delBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void addBook() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
-
 	private void getAllemployee() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void searchEmployee() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
 	private void addEmployee() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void delEmployee() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Option Under Construction");
 	}
 
+	private void delEmployee() {
+		System.out.println("Option Under Construction");
+	}
 }

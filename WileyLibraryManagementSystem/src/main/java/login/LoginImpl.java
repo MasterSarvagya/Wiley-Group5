@@ -25,9 +25,9 @@ public class LoginImpl implements Login {
 		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
 		Employee employee = employeeDaoImpl.searchEmployee(employeeID);
 
-		employee = new Employee(1, 11111, 5, false, "Master", employeePassword);
+		employee = new Employee(1, 11111, 5, false, "Master", "1");
 
-		if (employeePassword == employee.getPassword())
+		if (employeePassword.compareTo(employee.getPassword()) == 0)
 			loginSuccess();
 		else
 			loginFailed();
@@ -40,9 +40,10 @@ public class LoginImpl implements Login {
 		PresentationImpl presentationImpl = new PresentationImpl();
 		boolean flag = true;
 		while (flag) {
-			Integer ch = scanner.nextInt();
 			presentationImpl.showMenu();
-			presentationImpl.performMenu(ch);
+			System.out.print("Enter Choice: ");
+			Integer ch = scanner.nextInt();
+			flag = presentationImpl.performMenu(ch);
 		}
 
 	}
@@ -54,6 +55,6 @@ public class LoginImpl implements Login {
 		if (character == 'Y' || character == 'y')
 			loginInput();
 		else
-			System.out.print("Thanks For Using");
+			System.out.print("Thanks For Using The System");
 	}
 }
