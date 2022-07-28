@@ -6,9 +6,9 @@ import Bean.Books;
 
 public interface BooksDao {
 
-	Boolean addBook(Books book);
+	Integer addBook(Books book);
 
-	Boolean removeBook(int bookID);
+	Integer removeBook(int bookID);
 
 	Books searchBook(int bookID);
 
