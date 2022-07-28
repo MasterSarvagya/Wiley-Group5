@@ -1,39 +1,59 @@
 package login;
 
+import java.util.Scanner;
+
 import Bean.Employee;
+import Persistance.EmployeeDaoImpl;
 import Presentation.PresentationImpl;
 
 public class LoginImpl implements Login {
 
-	private Integer empID;
-	private String password;
+	Scanner scanner = new Scanner(System.in);
 
-	@Override
-	public void getInput() {
-		// TODO Auto-generated method stub
+	public void loginInput() {
 
-		Employee employee = new Employee(empID, empID, empID, null, password, password);
+		System.out.println("======================================================");
 
-		if (empID == employee.getEmpID() && password == employee.getPassword())
+		System.out.print("Enter Employee ID: ");
+		int employeeID = scanner.nextInt();
+
+		System.out.print("Enter Employee Password: ");
+		String employeePassword = scanner.next();
+
+		System.out.println("======================================================");
+
+		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
+		Employee employee = employeeDaoImpl.searchEmployee(employeeID);
+
+		employee = new Employee(1, 11111, 5, false, "Master", employeePassword);
+
+		if (employeePassword == employee.getPassword())
 			loginSuccess();
 		else
 			loginFailed();
+
+		scanner.close();
 	}
 
 	private void loginSuccess() {
 
 		PresentationImpl presentationImpl = new PresentationImpl();
-		while (true) {
+		boolean flag = true;
+		while (flag) {
+			Integer ch = scanner.nextInt();
 			presentationImpl.showMenu();
-			presentationImpl.performMenu(0);
+			presentationImpl.performMenu(ch);
 		}
 
 	}
 
 	private void loginFailed() {
-
 		System.out.println("Login Failed");
-
+		System.out.print("Try Again (Y/N): ");
+		Character character = scanner.next().charAt(0);
+		if (character == 'Y' || character == 'y')
+			loginInput();
+		else
+			System.out.print("Thanks For Using");
 	}
-
 }
