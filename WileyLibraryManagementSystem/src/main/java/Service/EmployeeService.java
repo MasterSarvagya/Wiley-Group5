@@ -8,10 +8,12 @@ public interface EmployeeService {
 
 	Boolean addEmployee(Employee employee);
 
-	Boolean removeEmployee(int empID);
+	Boolean removeEmployee(Integer empID);
 
-	Employee searchEmployee(int empID);
+	Employee searchEmployee(Integer empID);
 
 	List<Employee> getAllEmployees();
+	
+	Boolean employeeLogin(Integer empId, String password);
 
 }

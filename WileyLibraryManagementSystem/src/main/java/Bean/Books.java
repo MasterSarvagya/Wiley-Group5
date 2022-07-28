@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Books {
 
-	private int bookID;
+	private Integer bookID,originalQty,leftQty;
 	private String bookName, bookAuthor, bookType;
 
 }

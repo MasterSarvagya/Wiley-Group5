@@ -13,13 +13,13 @@ public class BooksServiceImpl implements BooksService {
 	}
 
 	@Override
-	public Boolean removeBook(int bookID) {
+	public Boolean removeBook(Integer bookID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Books searchBook(int bookID) {
+	public Books searchBook(Integer bookID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

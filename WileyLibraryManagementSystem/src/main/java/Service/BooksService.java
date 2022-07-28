@@ -8,9 +8,9 @@ public interface BooksService {
 	
 	Boolean addBook(Books book);
 
-	Boolean removeBook(int bookID);
+	Boolean removeBook(Integer bookID);
 
-	Books searchBook(int bookID);
+	Books searchBook(Integer bookID);
 
 	List<Books> getAllBooks();
 

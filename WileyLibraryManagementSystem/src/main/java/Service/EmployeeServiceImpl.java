@@ -13,13 +13,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Boolean removeEmployee(int empID) {
+	public Boolean removeEmployee(Integer empID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Employee searchEmployee(int empID) {
+	public Employee searchEmployee(Integer empID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -30,4 +30,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return null;
 	}
 
+	@Override
+	public Boolean employeeLogin(Integer empId, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

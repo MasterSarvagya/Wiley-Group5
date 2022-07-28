@@ -1,5 +1,6 @@
 package Bean;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class IssuedBooks {
 
 	private int empID, bookID;
-	private Date issueDate, returnDate;
+	private LocalDateTime issueDateTime, returnDateTime;
 	private double lateFees;
 
 }
