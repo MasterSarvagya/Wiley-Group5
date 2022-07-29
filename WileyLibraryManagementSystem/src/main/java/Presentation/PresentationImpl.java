@@ -152,7 +152,7 @@ public class PresentationImpl implements Presentation {
 		System.out.print("Enter Password: ");
 		String password = scanner.nextLine();
 		System.out.print("Enter Employee Phone Number: ");
-		int empPhoneNumber = scanner.nextInt();
+		Long empPhoneNumber = scanner.nextLong();
 
 		int bookLimit = 5;
 		boolean isAdmin = false;
