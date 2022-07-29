@@ -1,12 +1,17 @@
 package Presentation;
 
+<<<<<<< HEAD
+import java.util.List;
+import java.util.Scanner;
+
+=======
 import Bean.Books;
 import Service.BooksService;
 import Service.BooksServiceImpl;
+>>>>>>> branch 'master' of https://github.com/MasterSarvagya/Wiley-Project-Group.git
 import Bean.Employee;
 import Service.EmployeeService;
 import Service.EmployeeServiceImpl;
-import java.util.Scanner;
 
 public class PresentationImpl implements Presentation {
 
@@ -127,7 +132,9 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void getAllemployee() {
-		System.out.println("Option Under Construction");
+		List<Employee> empList = employeeService.getAllEmployees();
+		for(Employee employee : empList)
+			System.out.println(employee);
 	}
 
 	private void searchEmployee() {
@@ -161,6 +168,11 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void delEmployee() {
-		System.out.println("Option Under Construction");
+		System.out.print("Enter Employee ID : ");
+		int empID = scanner.nextInt();
+		if(employeeService.removeEmployee(empID))
+			System.out.println("Employee Deleted Successfully");
+		else
+			System.out.println("Employee deatils invalid");
 	}
 }
