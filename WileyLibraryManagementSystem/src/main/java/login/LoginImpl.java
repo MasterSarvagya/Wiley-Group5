@@ -25,7 +25,10 @@ public class LoginImpl implements Login {
 		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
 		Employee employee = employeeDaoImpl.searchEmployee(employeeID);
 
-		employee = new Employee(1, 11111, 5, false, "Master", "1");
+		//employee = new Employee(1, 11111, 5, false, "Master", "1");
+		
+		if(employee == null)
+			loginFailed();
 
 		if (employeePassword.compareTo(employee.getPassword()) == 0)
 			loginSuccess();

@@ -7,13 +7,15 @@ import lombok.Data;
 @AllArgsConstructor
 public class Employee {
 
-	private Integer empID, empPhoneNumber, bookLimit;
+	private Integer empID;
+	private Long empPhoneNumber;
+	private Integer bookLimit;
 	private Boolean isAdmin;
 	private String empName, password;
 
 	@Override
 	public String toString() {
-		return empID + "\t" + empName + "\t" + empPhoneNumber + "\t" + bookLimit;
+		return empID + "\t" + empName + "\t\t" + empPhoneNumber + "\t" + bookLimit;
 	}
 
 }

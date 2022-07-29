@@ -16,7 +16,7 @@ public class BooksDaoImpl implements BooksDao {
 	@Override
 	public Integer addBook(Books book) {
 		Integer rows=0;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "root",
+		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley",
 				"wiley");
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("INSERT INTO Books VALUES(?,?,?,?,?,?)");){
@@ -39,7 +39,7 @@ public class BooksDaoImpl implements BooksDao {
 	@Override
 	public Integer removeBook(int bookID) {
 		Integer rows=0;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "root",
+		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley",
 				"wiley");
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("DELETE FROM Books WHERE BOOK_ID=?");){
@@ -57,7 +57,7 @@ public class BooksDaoImpl implements BooksDao {
 	@Override
 	public Books searchBook(int bookID) {
 		Books book = null;
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "root",
+		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley",
 				"wiley");
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("SELECT * FROM BOOKS WHERE BOOK_ID=?");){
@@ -85,7 +85,7 @@ public class BooksDaoImpl implements BooksDao {
 	@Override
 	public List<Books> getAllBooks() {
 		List<Books> booksList = new ArrayList<>();
-		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "root",
+		try(Connection connection=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley",
 				"wiley");
 				Statement statement = connection
 						.createStatement();){
