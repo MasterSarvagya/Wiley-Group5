@@ -90,7 +90,7 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void delBook() {
-		System.out.println("Option Under Construction");
+		System.out.println("deleted");
 	}
 
 	private void addBook() {
