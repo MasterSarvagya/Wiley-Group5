@@ -1,8 +1,14 @@
 package Presentation;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Scanner;
 
+=======
+import Bean.Books;
+import Service.BooksService;
+import Service.BooksServiceImpl;
+>>>>>>> branch 'master' of https://github.com/MasterSarvagya/Wiley-Project-Group.git
 import Bean.Employee;
 import Service.EmployeeService;
 import Service.EmployeeServiceImpl;
@@ -11,6 +17,8 @@ public class PresentationImpl implements Presentation {
 	
 	private EmployeeService employeeService=new EmployeeServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
+	
+	private BooksService bookService=new BooksServiceImpl();
 
 	@Override
 	public void showMenu() {
@@ -49,7 +57,7 @@ public class PresentationImpl implements Presentation {
 			addBook();
 			break;
 		case 6:
-			delBook();
+			removeBook();
 			break;
 		case 7:
 			searchBook();
@@ -91,11 +99,44 @@ public class PresentationImpl implements Presentation {
 		System.out.println("Option Under Construction");
 	}
 
-	private void delBook() {
-		System.out.println("deleted");
+	private void removeBook() {
+		
+		System.out.println(" Enter Book ID : ");
+		int bookID =scanner.nextInt();
+		
+		boolean delete=bookService.removeBook(bookID);
+		if(delete) {
+			System.out.println("Element deleted");
+		}
+		else {
+			System.out.println("Cannot delete");
+		}	
 	}
 
 	private void addBook() {
+		
+		System.out.println("Enter book id");
+		int bookID = scanner.nextInt();
+		System.out.println("Enter Book Author");
+		String bookAuthor = scanner.nextLine();
+		System.out.println("Enter Book name");
+		String bookName = scanner.nextLine();
+		System.out.println("Enter Book Type");
+		String bookType = scanner.nextLine();
+		System.out.println("Enter Original Qty");
+		int originalQty = scanner.nextInt();
+		System.out.println("Enter Left Qty");
+		int leftQty = originalQty;
+		
+		Books book = new Books(bookID,originalQty,leftQty, bookName,bookAuthor,bookType);
+		if(bookService.addBook(book)) {
+			System.out.println("Book is added");
+		}
+		else {
+			System.out.println("Book's deatils invalid");
+		}
+		
+		
 		System.out.println("Option Under Construction");
 	}
 
