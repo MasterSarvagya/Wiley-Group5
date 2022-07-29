@@ -6,8 +6,8 @@ import Service.EmployeeServiceImpl;
 import java.util.Scanner;
 
 public class PresentationImpl implements Presentation {
-	
-	private EmployeeService employeeService=new EmployeeServiceImpl();
+
+	private EmployeeService employeeService = new EmployeeServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
 
 	@Override
@@ -102,37 +102,33 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void searchEmployee() {
-		System.out.println("Enter Employee ID : ");
-		int id=scanner.nextInt();
-		Employee empl=employeeService.searchEmployee(id);
-		if(empl!=null) {
-			System.out.println(empl.getEmpID()+"  "+empl.getEmpName());
-		}
-		else
-			System.out.println("Employee with id "+id+" does not exist");
+		System.out.print("Enter Employee ID: ");
+		int id = scanner.nextInt();
+		Employee empl = employeeService.searchEmployee(id);
+		if (empl != null) {
+			System.out.println(empl);
+		} else
+			System.out.println("Employee With ID " + id + " Does Not Exist");
 	}
 
 	private void addEmployee() {
-		System.out.println("Enter employee id");
+		System.out.print("Enter Employee ID: ");
 		int empID = scanner.nextInt();
-		System.out.println("Enter employee phone number");
-		int empPhoneNumber = scanner.nextInt();
-		System.out.println("Enter book limit");
-		int bookLimit = scanner.nextInt();
-		System.out.println("Enter if employee is admin or not(true/false)");
-		boolean isAdmin = scanner.nextBoolean();
-		System.out.println("Enter employee name");
+		System.out.print("Enter Employee Name: ");
 		String empName = scanner.nextLine();
-		System.out.println("Enter password");
+		System.out.print("Enter Password: ");
 		String password = scanner.nextLine();
-		
-		Employee employee = new Employee(empID,empPhoneNumber,bookLimit,isAdmin,empName,password);
-		if(employeeService.addEmployee(employee)) {
-			System.out.println("Employee added");
-		}
-		else {
-			System.out.println("Employee deatils invalid");
-		}
+		System.out.print("Enter Employee Phone Number: ");
+		int empPhoneNumber = scanner.nextInt();
+
+		int bookLimit = 5;
+		boolean isAdmin = false;
+
+		Employee employee = new Employee(empID, empPhoneNumber, bookLimit, isAdmin, empName, password);
+		if (employeeService.addEmployee(employee))
+			System.out.println("Employee Added Sccessfully");
+		else
+			System.out.println("Operation Failed");
 	}
 
 	private void delEmployee() {

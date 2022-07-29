@@ -16,4 +16,9 @@ public class IssuedBooks {
 	private LocalDateTime issueDateTime, returnDateTime;
 	private double lateFees;
 
+	@Override
+	public String toString() {
+		return empID + "\t" + bookID + "\t" + issueDateTime + "\t" + returnDateTime + "\t" + lateFees;
+	}
+
 }
