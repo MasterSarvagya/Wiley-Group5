@@ -108,30 +108,27 @@ public class PresentationImpl implements Presentation {
 			System.out.println(book);
 		else
 			System.out.println("Book With ID " + id + " Does Not Exist");
-
 	}
 
 	private void removeBook() {
-
 		System.out.print(" Enter Book ID: ");
 		int bookID = scanner.nextInt();
 		if (bookService.removeBook(bookID))
 			System.out.println("Book is Removed");
 		else
 			System.out.println("Operation Failed");
-
 	}
 
 	private void addBook() {
-
 		System.out.print("Enter Book ID: ");
 		int bookID = scanner.nextInt();
+		scanner.nextLine();
 		System.out.print("Enter Book Name: ");
-		String bookName = scanner.next();
+		String bookName = scanner.nextLine();
 		System.out.print("Enter Book Author: ");
-		String bookAuthor = scanner.next();
+		String bookAuthor = scanner.nextLine();
 		System.out.print("Enter Book Type: ");
-		String bookType = scanner.next();
+		String bookType = scanner.nextLine();
 		System.out.print("Enter Book Quantity: ");
 		int originalQty = scanner.nextInt();
 		int leftQty = originalQty;
@@ -164,10 +161,11 @@ public class PresentationImpl implements Presentation {
 	private void addEmployee() {
 		System.out.print("Enter Employee ID: ");
 		int empID = scanner.nextInt();
+		scanner.nextLine();
 		System.out.print("Enter Employee Name: ");
-		String empName = scanner.next();
+		String empName = scanner.nextLine();
 		System.out.print("Enter Password: ");
-		String password = scanner.next();
+		String password = scanner.nextLine();
 		System.out.print("Enter Employee Phone Number: ");
 		Long empPhoneNumber = scanner.nextLong();
 

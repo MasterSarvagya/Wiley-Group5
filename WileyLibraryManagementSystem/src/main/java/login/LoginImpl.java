@@ -9,6 +9,7 @@ import Presentation.PresentationImpl;
 public class LoginImpl implements Login {
 
 	Scanner scanner = new Scanner(System.in);
+	private Employee employee;
 
 	public void loginInput() {
 
@@ -25,14 +26,13 @@ public class LoginImpl implements Login {
 		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
 		Employee employee = employeeDaoImpl.searchEmployee(employeeID);
 
-		//employee = new Employee(1, 11111, 5, false, "Master", "1");
-		
-		if(employee == null)
+		if (employee == null)
 			loginFailed();
 
-		if (employeePassword.compareTo(employee.getPassword()) == 0)
+		if (employeePassword.compareTo(employee.getPassword()) == 0) {
+			this.employee = employee;
 			loginSuccess();
-		else
+		} else
 			loginFailed();
 
 		scanner.close();
@@ -42,7 +42,10 @@ public class LoginImpl implements Login {
 
 		PresentationImpl presentationImpl = new PresentationImpl();
 		boolean flag = true;
+		String nameString = employee.getEmpName();
 		while (flag) {
+			System.out.println("======================================================");
+			System.out.println("Welcome, " + nameString);
 			presentationImpl.showMenu();
 			System.out.print("Enter Choice: ");
 			Integer ch = scanner.nextInt();
