@@ -1,15 +1,12 @@
 package Presentation;
 
-<<<<<<< HEAD
 import java.util.List;
 import java.util.Scanner;
 
-=======
 import Bean.Books;
+import Bean.Employee;
 import Service.BooksService;
 import Service.BooksServiceImpl;
->>>>>>> branch 'master' of https://github.com/MasterSarvagya/Wiley-Project-Group.git
-import Bean.Employee;
 import Service.EmployeeService;
 import Service.EmployeeServiceImpl;
 
