@@ -89,11 +89,26 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void getAllBook() {
-		System.out.println("Option Under Construction");
+		List<Books> bookList = bookService.getAllBooks();
+		if (bookService.getAllBooks() == null)
+			System.out.println("No Books Present");
+		else {
+			for (Books book : bookList) {
+				System.out.println(book);
+
+			}
+		}
 	}
 
 	private void searchBook() {
-		System.out.println("Option  Construction");
+		System.out.println("Enter Book ID: ");
+		int id = scanner.nextInt();
+		Books book = bookService.searchBook(id);
+		if (book != null)
+			System.out.println(book);
+		else
+			System.out.println("Book With ID " + id + " Does Not Exist");
+
 	}
 
 	private void removeBook() {
@@ -112,11 +127,11 @@ public class PresentationImpl implements Presentation {
 		System.out.print("Enter Book ID: ");
 		int bookID = scanner.nextInt();
 		System.out.print("Enter Book Name: ");
-		String bookName = scanner.nextLine();
+		String bookName = scanner.next();
 		System.out.print("Enter Book Author: ");
-		String bookAuthor = scanner.nextLine();
+		String bookAuthor = scanner.next();
 		System.out.print("Enter Book Type: ");
-		String bookType = scanner.nextLine();
+		String bookType = scanner.next();
 		System.out.print("Enter Book Quantity: ");
 		int originalQty = scanner.nextInt();
 		int leftQty = originalQty;
@@ -130,6 +145,8 @@ public class PresentationImpl implements Presentation {
 
 	private void getAllemployee() {
 		List<Employee> empList = employeeService.getAllEmployees();
+		if (empList == null)
+			System.out.println("No Employee Found");
 		for (Employee employee : empList)
 			System.out.println(employee);
 	}
