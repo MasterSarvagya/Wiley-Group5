@@ -20,7 +20,6 @@ public class PresentationImpl implements Presentation {
 	@Override
 	public void showMenu() {
 		System.out.println("======================================================");
-		System.out.println(" 0.   Exit");
 		System.out.println(" 1.   Add An Employee");
 		System.out.println(" 2.   Delete An Employee");
 		System.out.println(" 3.   Search An Employee");
@@ -31,6 +30,7 @@ public class PresentationImpl implements Presentation {
 		System.out.println(" 8.   Get All Book");
 		System.out.println(" 9.   Issue A Book");
 		System.out.println(" 10.  Return A Book");
+		System.out.println(" 0.   Exit");
 		System.out.println("======================================================");
 	}
 
@@ -148,9 +148,9 @@ public class PresentationImpl implements Presentation {
 		System.out.print("Enter Employee ID: ");
 		int empID = scanner.nextInt();
 		System.out.print("Enter Employee Name: ");
-		String empName = scanner.nextLine();
+		String empName = scanner.next();
 		System.out.print("Enter Password: ");
-		String password = scanner.nextLine();
+		String password = scanner.next();
 		System.out.print("Enter Employee Phone Number: ");
 		Long empPhoneNumber = scanner.nextLong();
 
