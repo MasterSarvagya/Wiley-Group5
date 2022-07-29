@@ -11,11 +11,11 @@ import Service.EmployeeService;
 import Service.EmployeeServiceImpl;
 
 public class PresentationImpl implements Presentation {
-	
-	private EmployeeService employeeService=new EmployeeServiceImpl();
+
+	private EmployeeService employeeService = new EmployeeServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
-	
-	private BooksService bookService=new BooksServiceImpl();
+
+	private BooksService bookService = new BooksServiceImpl();
 
 	@Override
 	public void showMenu() {
@@ -93,96 +93,83 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void searchBook() {
-		System.out.println("Option Under Construction");
+		System.out.println("Option  Construction");
 	}
 
 	private void removeBook() {
-		
-		System.out.println(" Enter Book ID : ");
-		int bookID =scanner.nextInt();
-		
-		boolean delete=bookService.removeBook(bookID);
-		if(delete) {
-			System.out.println("Element deleted");
-		}
-		else {
-			System.out.println("Cannot delete");
-		}	
+
+		System.out.print(" Enter Book ID: ");
+		int bookID = scanner.nextInt();
+		if (bookService.removeBook(bookID))
+			System.out.println("Book is Removed");
+		else
+			System.out.println("Operation Failed");
+
 	}
 
 	private void addBook() {
-		
-		System.out.println("Enter book id");
+
+		System.out.print("Enter Book ID: ");
 		int bookID = scanner.nextInt();
-		System.out.println("Enter Book Author");
-		String bookAuthor = scanner.nextLine();
-		System.out.println("Enter Book name");
+		System.out.print("Enter Book Name: ");
 		String bookName = scanner.nextLine();
-		System.out.println("Enter Book Type");
+		System.out.print("Enter Book Author: ");
+		String bookAuthor = scanner.nextLine();
+		System.out.print("Enter Book Type: ");
 		String bookType = scanner.nextLine();
-		System.out.println("Enter Original Qty");
+		System.out.print("Enter Book Quantity: ");
 		int originalQty = scanner.nextInt();
-		System.out.println("Enter Left Qty");
 		int leftQty = originalQty;
-		
-		Books book = new Books(bookID,originalQty,leftQty, bookName,bookAuthor,bookType);
-		if(bookService.addBook(book)) {
-			System.out.println("Book is added");
-		}
-		else {
-			System.out.println("Book's deatils invalid");
-		}
-		
-		
-		System.out.println("Option Under Construction");
+
+		Books book = new Books(bookID, originalQty, leftQty, bookName, bookAuthor, bookType);
+		if (bookService.addBook(book))
+			System.out.println("Book is Added");
+		else
+			System.out.println("Operation Failed");
 	}
 
 	private void getAllemployee() {
 		List<Employee> empList = employeeService.getAllEmployees();
-		for(Employee employee : empList)
+		for (Employee employee : empList)
 			System.out.println(employee);
 	}
 
 	private void searchEmployee() {
-		System.out.println("Enter Employee ID : ");
-		int id=scanner.nextInt();
-		Employee empl=employeeService.searchEmployee(id);
-		if(empl!=null) {
-			System.out.println(empl.getEmpID()+"  "+empl.getEmpName());
-		}
-		else
-			System.out.println("Employee with id "+id+" does not exist");
+		System.out.print("Enter Employee ID: ");
+		int id = scanner.nextInt();
+		Employee empl = employeeService.searchEmployee(id);
+		if (empl != null) {
+			System.out.println(empl);
+		} else
+			System.out.println("Employee With ID " + id + " Does Not Exist");
 	}
 
 	private void addEmployee() {
-		System.out.println("Enter employee id");
+		System.out.print("Enter Employee ID: ");
 		int empID = scanner.nextInt();
-		System.out.println("Enter employee phone number");
-		int empPhoneNumber = scanner.nextInt();
-		System.out.println("Enter book limit");
-		int bookLimit = scanner.nextInt();
-		System.out.println("Enter if employee is admin or not(true/false)");
-		boolean isAdmin = scanner.nextBoolean();
-		System.out.println("Enter employee name");
+		System.out.print("Enter Employee Name: ");
 		String empName = scanner.nextLine();
-		System.out.println("Enter password");
+		System.out.print("Enter Password: ");
 		String password = scanner.nextLine();
-		
-		Employee employee = new Employee(empID,empPhoneNumber,bookLimit,isAdmin,empName,password);
-		if(employeeService.addEmployee(employee)) {
-			System.out.println("Employee added");
-		}
-		else {
-			System.out.println("Employee deatils invalid");
-		}
+		System.out.print("Enter Employee Phone Number: ");
+		int empPhoneNumber = scanner.nextInt();
+
+		int bookLimit = 5;
+		boolean isAdmin = false;
+
+		Employee employee = new Employee(empID, empPhoneNumber, bookLimit, isAdmin, empName, password);
+		if (employeeService.addEmployee(employee))
+			System.out.println("Employee Added Sccessfully");
+		else
+			System.out.println("Operation Failed");
 	}
 
 	private void delEmployee() {
-		System.out.print("Enter Employee ID : ");
+		System.out.print("Enter Employee ID: ");
 		int empID = scanner.nextInt();
-		if(employeeService.removeEmployee(empID))
+		if (employeeService.removeEmployee(empID))
 			System.out.println("Employee Deleted Successfully");
 		else
-			System.out.println("Employee deatils invalid");
+			System.out.println("Operation Failed");
 	}
 }
