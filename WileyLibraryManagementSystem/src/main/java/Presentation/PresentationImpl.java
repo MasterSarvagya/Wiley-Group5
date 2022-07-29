@@ -12,8 +12,8 @@ public class PresentationImpl implements Presentation {
 
 	private EmployeeService employeeService = new EmployeeServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
-	
-	private BooksService bookService=new BooksServiceImpl();
+
+	private BooksService bookService = new BooksServiceImpl();
 
 	@Override
 	public void showMenu() {
@@ -95,44 +95,35 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void removeBook() {
-		
-		System.out.println(" Enter Book ID : ");
-		int bookID =scanner.nextInt();
-		
-		boolean delete=bookService.removeBook(bookID);
-		if(delete) {
-			System.out.println("Element deleted");
-		}
-		else {
-			System.out.println("Cannot delete");
-		}	
+
+		System.out.print(" Enter Book ID: ");
+		int bookID = scanner.nextInt();
+		if (bookService.removeBook(bookID))
+			System.out.println("Book is Removed");
+		else
+			System.out.println("Operation Failed");
+
 	}
 
 	private void addBook() {
-		
-		System.out.println("Enter book id");
+
+		System.out.print("Enter Book ID: ");
 		int bookID = scanner.nextInt();
-		System.out.println("Enter Book Author");
-		String bookAuthor = scanner.nextLine();
-		System.out.println("Enter Book name");
+		System.out.print("Enter Book Name: ");
 		String bookName = scanner.nextLine();
-		System.out.println("Enter Book Type");
+		System.out.print("Enter Book Author: ");
+		String bookAuthor = scanner.nextLine();
+		System.out.print("Enter Book Type: ");
 		String bookType = scanner.nextLine();
-		System.out.println("Enter Original Qty");
+		System.out.print("Enter Book Quantity: ");
 		int originalQty = scanner.nextInt();
-		System.out.println("Enter Left Qty");
 		int leftQty = originalQty;
-		
-		Books book = new Books(bookID,originalQty,leftQty, bookName,bookAuthor,bookType);
-		if(bookService.addBook(book)) {
-			System.out.println("Book is added");
-		}
-		else {
-			System.out.println("Book's deatils invalid");
-		}
-		
-		
-		System.out.println("Option Under Construction");
+
+		Books book = new Books(bookID, originalQty, leftQty, bookName, bookAuthor, bookType);
+		if (bookService.addBook(book))
+			System.out.println("Book is Added");
+		else
+			System.out.println("Operation Failed");
 	}
 
 	private void getAllemployee() {
