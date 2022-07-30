@@ -41,15 +41,16 @@ public class LoginImpl implements Login {
 	private void loginSuccess() {
 
 		PresentationImpl presentationImpl = new PresentationImpl();
-		boolean flag = true;
+		Boolean flag = true;
+		Boolean isAdmin = employee.getIsAdmin();
 		String nameString = employee.getEmpName();
 		while (flag) {
 			System.out.println("======================================================");
 			System.out.println("Welcome, " + nameString);
-			presentationImpl.showMenu();
+			presentationImpl.showMenu(isAdmin);
 			System.out.print("Enter Choice: ");
 			Integer ch = scanner.nextInt();
-			flag = presentationImpl.performMenu(ch);
+			flag = presentationImpl.performMenu(ch, isAdmin);
 		}
 
 	}
