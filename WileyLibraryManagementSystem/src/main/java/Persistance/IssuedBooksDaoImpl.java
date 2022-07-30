@@ -15,14 +15,17 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
+import Bean.IssuedBooks;
+
 public class IssuedBooksDaoImpl implements IssuedBooksDao {
 	
 	private static Scanner scanner = new Scanner(System.in);
 
 	@Override
+
 	public Boolean issueBook(int empID, int booksID) {
 		
-		boolean step1,step2,step3;
+		Boolean step1,step2,step3;
 		step1=step2=step3=false;
 		
 		BooksDaoImpl bookDaoImpl = new BooksDaoImpl();
@@ -80,13 +83,62 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 		
 			step3 = (employeeDaoImpl.addEmployee(employee) > 0) && (bookDaoImpl.addBook(book) > 0);
 			
-		return step1 && step2 && step3;
+		return (step1 && step2 && step3);
+	}
+	@Override
+	public Boolean returnBook(int empID, Integer booksID) {
+		
+		//Step I -
+		// search issue boook for empid and book id
+		// get IssuedBook object if return date == null
+		
+		
+		
+		
+		//Step II - 
+		// Issued books set return date - now(), 
+		// latefees = scheduleddate - returndate;
+		
+		//Step III -
+		// Increase user book limit (searchemployeebyid object)
+		// Increase user book quantity left (searcbookbyid object)
+		
+		//Step IV -
+		//Update employee,book and issuedBook;
+		// UPDATE TABLE ISSUEDBOOK SET RETURNDATE = returndate, LATEFEES = latefees where 
+		// where empid = empid and booksid = bookid;
+		
+		//return latefees;
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Boolean returnBook(int empID, int booksID) {
+	public IssuedBooks searchIssuedBooks(int empID, int booksID) {
+		// TODO Auto-generated method stub
+		// select * from issuedbooks where empid - empid and booksid = bookid
+		return null;
+	}
+
+	@Override
+	public List<IssuedBooks> getAllIssuedBooks(int empID, int booksID) {
+		return null;
+	}
+	@Override
+	public void issueBook(int empID, int booksID) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public java.lang.Boolean issueBook(int empID, Integer booksID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void returnBook(int empID, int booksID) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
