@@ -10,7 +10,6 @@ public class Main {
 		Login login = new LoginImpl();
 
 		login.loginInput();
-
 	}
 
 }

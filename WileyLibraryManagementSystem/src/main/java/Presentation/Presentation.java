@@ -2,8 +2,8 @@ package Presentation;
 
 public interface Presentation {
 
-	void showMenu();
+	void showMenu(Boolean isAdmin);
 
-	Boolean performMenu(int choice);
+	Boolean performMenu(Integer choice, Boolean isAdmin);
 
 }
