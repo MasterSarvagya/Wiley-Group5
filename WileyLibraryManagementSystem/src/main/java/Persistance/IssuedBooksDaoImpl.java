@@ -3,6 +3,7 @@ package Persistance;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -80,7 +81,24 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 	public IssuedBooks searchIssuedBooks(Integer empID, Integer booksID) {
 		// TODO Auto-generated method stub
 		// select * from issuedbooks where empid - empid and booksid = bookid
-		return null;
+		IssuedBooks issuedBook=null;
+		try (Connection connection = DriverManager
+				.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley", "wiley");
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM ISSUEDBOOKS WHERE EMPLOYEE_ID=? AND BOOK_ID=?");){
+			preparedStatement.setInt(1, empID);
+			preparedStatement.setInt(2, booksID);
+			ResultSet resultSet=preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				LocalDateTime issueDate=LocalDateTime.of(resultSet.getDate(3), resultSet.getTime(3));
+				LocalDateTime returnDate=LocalDateTime.of(resultSet.getDate(4), resultSet.getTime(4));
+				double lateFees=resultSet.getDouble(5);
+				
+				issuedBook=new IssuedBooks(empID, booksID, issueDate, returnDate, lateFees);
+			}
+		}catch (SQLException e) {
+		}
+		return issuedBook;
 	}
 
 	@Override
