@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,69 +57,54 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 	@Override
 	public Double returnBook(Integer empID, Integer booksID) {
 
-		// Step I -
-		// search issue boook for empid and book id
-		// get IssuedBook object if return date == null
-		
-		
-		IssuedBooks ib=searchIssuedBooks(empID, booksID);
-		//if(ib.getReturnDateTime()==new Timestamp(0));
-		//return false;
+		IssuedBooks issuedBooks = searchIssuedBooks(empID, booksID);
+		if (issuedBooks.getReturnDateTime().compareTo(new Timestamp(0).toLocalDateTime()) == 0) {
 
-		// Step II -
-		// Issued books set return date - now(),
-		// latefees = scheduleddate - returndate;
-		
-		
-		ib.setReturnDateTime(LocalDateTime.now());
-		//ib.setLateFees(ib.getIssueDateTime().minus);
-		
-		
-		
+			BooksDaoImpl bookDaoImpl = new BooksDaoImpl();
+			EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
 
-		// Step III -
-		// Increase user book limit (searchemployeebyid object)
-		// Increase user book quantity left (searcbookbyid object)
-		
-		BooksDaoImpl bookDaoImpl = new BooksDaoImpl();
-		EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
-		Employee employee = employeeDaoImpl.searchEmployee(empID);
-		Books book = bookDaoImpl.searchBook(booksID);
-		
-		employeeDaoImpl.removeEmployee(empID);
-		bookDaoImpl.removeBook(booksID);
+			Employee employee = employeeDaoImpl.searchEmployee(empID);
+			Books book = bookDaoImpl.searchBook(booksID);
 
-		employee.setBookLimit(employee.getBookLimit() + 1);
-		book.setLeftQty(book.getLeftQty() + 1);
+			employeeDaoImpl.removeEmployee(empID);
+			bookDaoImpl.removeBook(booksID);
 
-		// Step IV -
-		// Update employee,book and issuedBook;
-		// UPDATE TABLE ISSUEDBOOK SET RETURNDATE = returndate, LATEFEES = latefees
-		// where
-		// where empid = empid and booksid = bookid;
-			
-		employeeDaoImpl.addEmployee(employee);
-		bookDaoImpl.addBook(book);
-		
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem",
-				"Wiley", "wiley");
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("UPDATE ISSUEDBOOKS SET RETURN_DATETIME=?,LATE_FEES=? WHERE EMPLOYEE_ID=? AND BOOK_ID=?");){
-			
-			preparedStatement.setTimestamp(1, Timestamp.valueOf(ib.getReturnDateTime()));
-			preparedStatement.setDouble(2,ib.getLateFees());
-			preparedStatement.setInt(3,empID);
-			preparedStatement.setInt(4, booksID);
-			if(preparedStatement.executeUpdate()!=0) {
-				return ib.getLateFees();
+			employee.setBookLimit(employee.getBookLimit() + 1);
+			book.setLeftQty(book.getLeftQty() + 1);
+
+			issuedBooks.setReturnDateTime(LocalDateTime.now());
+
+			double latefees = ChronoUnit.DAYS.between(issuedBooks.getIssueDateTime(), issuedBooks.getReturnDateTime());
+			int constant = 0;
+			if (book.getBookType().compareTo("Management") == 0)
+				constant = 7;
+			else if (book.getBookType().compareTo("Technology") == 0)
+				constant = 6;
+			else
+				constant = 5;
+			issuedBooks.setLateFees(latefees * constant);
+
+			employeeDaoImpl.addEmployee(employee);
+			bookDaoImpl.addBook(book);
+
+			try (Connection connection = DriverManager
+					.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley", "wiley");
+					PreparedStatement preparedStatement = connection.prepareStatement(
+							"UPDATE ISSUEDBOOKS SET RETURN_DATETIME=?,LATE_FEES=? WHERE EMPLOYEE_ID=? AND BOOK_ID=? LIMIT 1");) {
+
+				preparedStatement.setTimestamp(1, Timestamp.valueOf(issuedBooks.getReturnDateTime()));
+				preparedStatement.setDouble(2, issuedBooks.getLateFees());
+				preparedStatement.setInt(3, empID);
+				preparedStatement.setInt(4, booksID);
+				System.out.println(preparedStatement);
+				if (preparedStatement.executeUpdate() != 0) {
+					return issuedBooks.getLateFees();
+				}
+
+			} catch (SQLException e) {
+				System.out.println(e.getLocalizedMessage());
 			}
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
 		}
-		
-	
 		return -1.0;
 	}
 
@@ -141,6 +127,7 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 						lateFees);
 			}
 		} catch (SQLException e) {
+			System.out.println(e.getLocalizedMessage());
 		}
 		return issuedBook;
 	}

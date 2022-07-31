@@ -3,36 +3,31 @@ package Service;
 import java.util.List;
 
 import Bean.IssuedBooks;
+import Persistance.IssuedBooksDao;
+import Persistance.IssuedBooksDaoImpl;
 
 public class IssuedBooksServiceImpl implements IssuedBooksService {
 
-	private Integer calcLateFees() {
-		return 0;
-	}
+	IssuedBooksDao issuedBooksDao = new IssuedBooksDaoImpl();
 
 	@Override
 	public Boolean issueBook(Integer empID, Integer booksID) {
-		// TODO Auto-generated method stub
-		return null;
+		return issuedBooksDao.issueBook(empID, booksID);
 	}
 
 	@Override
 	public Double returnBook(Integer empID, Integer booksID) {
-		// TODO Auto-generated method stub
-		return null;
+		return issuedBooksDao.returnBook(empID, booksID);
 	}
 
 	@Override
 	public IssuedBooks searchIssuedBooks(Integer empID, Integer booksID) {
-		// TODO Auto-generated method stub
-		return null;
+		return issuedBooksDao.searchIssuedBooks(empID, booksID);
 	}
-	
+
 	@Override
 	public List<IssuedBooks> getAllIssuedBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		return issuedBooksDao.getAllIssuedBooks();
 	}
-	
 
 }
