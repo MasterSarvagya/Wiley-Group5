@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import Bean.Books;
@@ -27,13 +28,14 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 			try (Connection connection = DriverManager
 					.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley", "wiley");
 					PreparedStatement preparedStatement = connection
-							.prepareStatement("INSERT INTO IssuedBooks VALUES(?,?,?,?,?)");) {
+							.prepareStatement("INSERT INTO IssuedBooks VALUES(?,?,?,?,?,?)");) {
 
 				preparedStatement.setInt(1, employee.getEmpID());
 				preparedStatement.setInt(2, book.getBookID());
 				preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-				preparedStatement.setTimestamp(4, null);
-				preparedStatement.setDouble(5, 0);
+				preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now().plusDays(7)));
+				preparedStatement.setTimestamp(5, new Timestamp(0));
+				preparedStatement.setDouble(6, 0);
 
 				if (preparedStatement.executeUpdate() != 0) {
 					employeeDaoImpl.removeEmployee(empID);
@@ -44,7 +46,8 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 
 					return (employeeDaoImpl.addEmployee(employee) > 0) && (bookDaoImpl.addBook(book) > 0);
 				}
-			} catch (SQLException e) {
+			} catch (Exception e) {
+				System.out.println(e.getLocalizedMessage());
 			}
 		}
 		return false;
@@ -79,31 +82,48 @@ public class IssuedBooksDaoImpl implements IssuedBooksDao {
 
 	@Override
 	public IssuedBooks searchIssuedBooks(Integer empID, Integer booksID) {
-		// TODO Auto-generated method stub
-		// select * from issuedbooks where empid - empid and booksid = bookid
-		IssuedBooks issuedBook=null;
-		try (Connection connection = DriverManager
-				.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem", "Wiley", "wiley");
+		IssuedBooks issuedBook = null;
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem",
+				"Wiley", "wiley");
 				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM ISSUEDBOOKS WHERE EMPLOYEE_ID=? AND BOOK_ID=?");){
+						.prepareStatement("SELECT * FROM ISSUEDBOOKS WHERE EMPLOYEE_ID=? AND BOOK_ID=?");) {
 			preparedStatement.setInt(1, empID);
 			preparedStatement.setInt(2, booksID);
-			ResultSet resultSet=preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				LocalDateTime issueDate=LocalDateTime.of(resultSet.getDate(3), resultSet.getTime(3));
-				LocalDateTime returnDate=LocalDateTime.of(resultSet.getDate(4), resultSet.getTime(4));
-				double lateFees=resultSet.getDouble(5);
-				
-				issuedBook=new IssuedBooks(empID, booksID, issueDate, returnDate, lateFees);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				LocalDateTime issueDateTime = resultSet.getTimestamp(3).toLocalDateTime();
+				LocalDateTime scheduledReturnDateTime = resultSet.getTimestamp(4).toLocalDateTime();
+				LocalDateTime returnDateTime = resultSet.getTimestamp(5).toLocalDateTime();
+				double lateFees = resultSet.getDouble(6);
+				issuedBook = new IssuedBooks(empID, booksID, issueDateTime, scheduledReturnDateTime, returnDateTime,
+						lateFees);
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 		}
 		return issuedBook;
 	}
 
 	@Override
-	public List<IssuedBooks> getAllIssuedBooks(Integer empID, Integer booksID) {
-		return null;
+	public List<IssuedBooks> getAllIssuedBooks() {
+		List<IssuedBooks> issuedBooks = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem",
+				"Wiley", "wiley");
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM ISSUEDBOOKS");) {
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Integer empID = resultSet.getInt(1);
+				Integer booksID = resultSet.getInt(2);
+				LocalDateTime issueDateTime = resultSet.getTimestamp(3).toLocalDateTime();
+				LocalDateTime scheduledReturnDateTime = resultSet.getTimestamp(4).toLocalDateTime();
+				LocalDateTime returnDateTime = resultSet.getTimestamp(5).toLocalDateTime();
+				double lateFees = resultSet.getDouble(6);
+				issuedBooks.add(new IssuedBooks(empID, booksID, issueDateTime, scheduledReturnDateTime, returnDateTime,
+						lateFees));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return issuedBooks;
 	}
 
 }

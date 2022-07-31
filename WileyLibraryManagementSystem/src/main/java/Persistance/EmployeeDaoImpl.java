@@ -30,7 +30,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			rows = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
 		}
 
 		return rows;
@@ -48,7 +48,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			rows = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
 		}
 
 		return rows;
@@ -76,7 +76,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				employee = new Employee(id, phone, limit, admin, name, password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
 		}
 
 		return employee;
@@ -101,7 +101,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				empList.add(employee);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getLocalizedMessage());
 		}
 		return empList;
 	}

@@ -12,5 +12,5 @@ public interface IssuedBooksDao {
 
 	IssuedBooks searchIssuedBooks(Integer empID, Integer booksID);
 
-	List<IssuedBooks> getAllIssuedBooks(Integer empID, Integer booksID);
+	List<IssuedBooks> getAllIssuedBooks();
 }
