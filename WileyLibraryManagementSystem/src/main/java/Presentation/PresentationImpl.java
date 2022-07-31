@@ -31,6 +31,8 @@ public class PresentationImpl implements Presentation {
 			System.out.println(" 8.   Get All Book");
 			System.out.println(" 9.   Issue A Book");
 			System.out.println(" 10.  Return A Book");
+			System.out.println(" 11.  Search Issued Book");
+			System.out.println(" 12.  Get All Issued Book");
 			System.out.println(" 0.   Exit");
 			System.out.println("======================================================");
 		} else {
@@ -79,6 +81,12 @@ public class PresentationImpl implements Presentation {
 			case 10:
 				returnBook();
 				break;
+			case 11:
+				searchIssuedBooks();
+				break;
+			case 12:
+				getAllIssuedBooks();
+				break;
 			case 0:
 				System.out.print("Thanks For Using The System");
 				return false;
@@ -112,6 +120,16 @@ public class PresentationImpl implements Presentation {
 
 		return true;
 
+	}
+
+	private void getAllIssuedBooks() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchIssuedBooks() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void returnBook() {
