@@ -5,15 +5,19 @@ import java.util.Scanner;
 
 import Bean.Books;
 import Bean.Employee;
+import Bean.IssuedBooks;
 import Service.BooksService;
 import Service.BooksServiceImpl;
 import Service.EmployeeService;
 import Service.EmployeeServiceImpl;
+import Service.IssuedBooksService;
+import Service.IssuedBooksServiceImpl;
 
 public class PresentationImpl implements Presentation {
 
 	private EmployeeService employeeService = new EmployeeServiceImpl();
 	private BooksService bookService = new BooksServiceImpl();
+	private IssuedBooksService issuedBookService=new IssuedBooksServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
 
 	@Override
@@ -123,21 +127,50 @@ public class PresentationImpl implements Presentation {
 	}
 
 	private void getAllIssuedBooks() {
-		// TODO Auto-generated method stub
-		
+		List<IssuedBooks> bookList=issuedBookService.getAllIssuedBooks();
+		if(issuedBookService.getAllIssuedBooks()== null)
+			System.out.println("No Issued Books Present");
+		else {
+			for(IssuedBooks book:bookList) 
+				System.out.println(book);	
+		}
 	}
 
+	
 	private void searchIssuedBooks() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Enter BookId and EmpId");
+		int bookId=scanner.nextInt();
+		int empId=scanner.nextInt();
+		IssuedBooks book =issuedBookService.searchIssuedBooks(bookId, empId);
+		if(book!=null)
+			System.out.println(book);
+		else
+			System.out.println("Book With ID " + bookId + " is not issued with Employee Id"+empId);
 	}
 
 	private void returnBook() {
-		System.out.println("Option Under Construction");
+		System.out.println("Enter employee id and book id ");
+		int empId=scanner.nextInt();
+		int bookId=scanner.nextInt();
+		if(issuedBookService.searchIssuedBooks(bookId, empId) != null) {
+			System.out.println("Book Returned");
+		}
+		else {
+			System.out.println("Failed to Return");
+		}
+		
 	}
 
 	private void issueBook() {
-		System.out.println("Option Under Construction");
+		System.out.println("Enter employee id and book id ");
+		int empId=scanner.nextInt();
+		int bookId=scanner.nextInt();
+		if(issuedBookService.issueBook(empId,bookId)) {
+			System.out.println("Book is Issued");
+		}
+		else
+			System.out.println("Failed to issue");
+		
 	}
 
 	private void getAllBook() {

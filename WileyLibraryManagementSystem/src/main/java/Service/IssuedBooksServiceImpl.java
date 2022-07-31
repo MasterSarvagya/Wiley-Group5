@@ -2,6 +2,8 @@ package Service;
 
 import java.util.List;
 
+import Bean.IssuedBooks;
+
 public class IssuedBooksServiceImpl implements IssuedBooksService {
 
 	private Integer calcLateFees() {
@@ -9,15 +11,28 @@ public class IssuedBooksServiceImpl implements IssuedBooksService {
 	}
 
 	@Override
-	public Boolean issueBook(Integer empID, List<Integer> booksID) {
+	public Boolean issueBook(Integer empID, Integer booksID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Boolean returnBook(Integer empID, List<Integer> booksID) {
+	public Double returnBook(Integer empID, Integer booksID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public IssuedBooks searchIssuedBooks(Integer empID, Integer booksID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<IssuedBooks> getAllIssuedBooks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }
