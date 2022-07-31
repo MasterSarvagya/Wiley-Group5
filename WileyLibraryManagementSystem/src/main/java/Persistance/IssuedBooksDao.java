@@ -8,7 +8,7 @@ public interface IssuedBooksDao {
 
 	Boolean issueBook(Integer empID, Integer booksID);
 
-	Boolean returnBook(Integer empID, Integer booksID);
+	Double returnBook(Integer empID, Integer booksID);
 
 	IssuedBooks searchIssuedBooks(Integer empID, Integer booksID);
 
